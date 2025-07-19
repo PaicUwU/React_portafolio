@@ -6,8 +6,6 @@ import { useGlitch } from 'react-powerglitch'
 
   const [glitch, setGlitch] = useState('base'); 
 
-  const glitcheo = useGlitch();
-
   const instantaneo = useGlitch({
     glitchTimeSpan: {
             start: 0,
@@ -69,7 +67,7 @@ import { useGlitch } from 'react-powerglitch'
                   </span> }
                   <div className='fondo'>
                       <h1 className="glitch ">
-                        <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
+                        <span ref={instantaneo.ref} style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
                         <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute'>{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
                         <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
                       </h1>
