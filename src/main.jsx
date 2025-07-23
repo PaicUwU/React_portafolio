@@ -4,6 +4,7 @@ import './header/app.css'
 import './start/start.css'
 import Header from './header/App.jsx'
 import Start from './start/Start.jsx'
+import Skills  from './skills/Skills.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
       </div>
       <Header />
       <Start />
+      <Skills />
     </div>
   </StrictMode>,
 )

@@ -89,10 +89,11 @@ import { useGlitch } from 'react-powerglitch'
                   </div>
                   <div className='flex flex-row gap-5 items-center'>
                     <button  type="button" onClick={handleClick}
-                      className=" text-black py-2 px-6 bg-pink-500 rounded-md w-45 h-12 b"
-                      >?
+                      className=" text-black py-2 px-6 bg-pink-500 rounded-md w-45 h-12 b flex items-center justify-center cursor-help "
+                      >
+                        <img className='w-8 h-8' src="/assets/question_mark.svg" alt="No tocar" />
                     </button>
-                    <a href="https://www.facebook.com/paicalva/">
+                    <a target='_blank' href="https://www.facebook.com/paicalva/">
                       <img src="/assets/facebook.svg" alt="Facebook"  style={{ filter: 'saturate(150%) brightness(150%)' }}  className='w-12 h-12' />
                     </a>
                     <a target='_blank' href="https://www.linkedin.com/in/alvaro-garcia-715b90320">
@@ -104,10 +105,13 @@ import { useGlitch } from 'react-powerglitch'
                   </div>
                 </div>
             </div>
-
-            <div  className='glitch-img h-80 w-80  bg-gradient-to-r from-green-900 to-violet-900  border-12 border-black  outline-4 outline-lime-500  outline-offset-4   '>
-                  
-                  {glitch === 'base' &&
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <div  className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 to-rose-600 blur-3xl opacity-80 animate-pulse"></div>
+              <div className="relative border-4 border-lime-400 bg-black p-4 shadow-2xl shadow-green-400/50">
+                <div className="w-80 h-80 bg-gradient-to-br from-green-400/20 via-cyan-400/20 to-magenta-400/20 flex items-center justify-center text-6xl font-bold">
+                  <div className="text-center">
+                    {glitch === 'base' &&
                     <div>
                       <img src="/assets/foto-alvaro.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
                     </div>}
@@ -117,7 +121,7 @@ import { useGlitch } from 'react-powerglitch'
                     </div>}
                   {glitch === 'cambio' &&
                     <div>
-                      <img ref={delay.ref} src="/assets/gato-dudoso.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
+                      <img ref={delay.ref} src="/assets/alpha-y-yo.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
                     </div>}
                   {/* <img
                   ref={glitch_library.ref} className="glitch-img w-full h-full object-cover"
@@ -130,9 +134,14 @@ import { useGlitch } from 'react-powerglitch'
                       ? '/assets/gato-dudoso.jpeg'
                       : ''
                   }/> */}
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>          
         </div>
      </div>
+
 
     </section>
   )
