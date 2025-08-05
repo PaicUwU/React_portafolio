@@ -1,12 +1,16 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { useGlitch } from 'react-powerglitch'
+import { fetchData } from '../api/fetchData'
+
+  const apiData = fetchData('http://127.0.0.1:8000/api/aboutme');
 
   const Start = () => {
-
+    
+  const data = apiData.read();
   const [glitch, setGlitch] = useState('base'); 
 
-  const instantaneo = useGlitch({
+  const instan = useGlitch({
     glitchTimeSpan: {
             start: 0,
             end: 0.7,
@@ -62,30 +66,25 @@ import { useGlitch } from 'react-powerglitch'
                   <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='text-purple-600 font-press-start text-6xl'>
                     SOY_
                   </span>
+                  <Suspense fallback={<div>Loading...</div>}>
                   {glitch === 'base' && <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl'>
-                    [ALVARO]
+                    [{data?.[0]?.about_name}]
                   </span> }
                   <div className='fondo'>
                       <h1 className="glitch ">
-                        <span ref={instantaneo.ref} style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
-                        <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute'>{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
-                        <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && '{ALVARO}'}{glitch === 'cambio' && '{PAIC}'}</span>
+                        <span ref={instan.ref} style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && `{${data[0].about_name}}`}{glitch === 'cambio' && '{PAIC}'}</span>
+                        <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute'>{glitch === 'glitch' && `{${data[0].about_name}}`}{glitch === 'cambio' && '{PAIC}'}</span>
+                        <span style={{ filter: 'saturate(150%) brightness(120%)' }} className='texto-glitch bg-gradient-to-r from-pink-500 to-yellow-600 bg-clip-text text-transparent font-press-start text-6xl absolute' aria-hidden="true">{glitch === 'glitch' && `{${data[0].about_name}}`}{glitch === 'cambio' && '{PAIC}'}</span>
                       </h1>
                   </div>
+                  </Suspense>
                   </div>
                   <div style={{ filter: 'saturate(150%) brightness(120%)' }} className='p-4 flex flex-col gap-2  w-full h-40 border-2 border-lime-500 shadow-lg/30 shadow-lime-500 bg-black response'>
-                    <span className='text-green-700 font-serif font-extralight tracking-widest '>
-                      {'<'} texto de ejemplo.exe {'>'}
+                    <Suspense fallback={<div>Loading...</div>}>
+                    <span className='text-green-700 font-serif font-extralight tracking-widest leading-loose'>
+                      {'<'} {data?.[0]?.about_description} {'>'}
                     </span>
-                    <span className='text-green-700 font-serif font-extralight tracking-widest '>
-                      {'<'} texto de ejemplo.exe {'>'}
-                    </span>
-                    <span className='text-green-700 font-serif font-extralight tracking-widest '>
-                      {'<'} texto de ejemplo.exe {'>'}
-                    </span>
-                    <span className='text-green-700 font-serif font-extralight tracking-widest '>
-                      {'<'} texto de ejemplo.exe {'>'}
-                    </span>
+                    </Suspense>
                   </div>
                   <div className='flex flex-row gap-5 items-center'>
                     <button  type="button" onClick={handleClick}
@@ -111,29 +110,20 @@ import { useGlitch } from 'react-powerglitch'
               <div className="relative border-4 border-lime-400 bg-black p-4 shadow-2xl shadow-green-400/50">
                 <div className="w-80 h-80 bg-gradient-to-br from-green-400/20 via-cyan-400/20 to-magenta-400/20 flex items-center justify-center text-6xl font-bold">
                   <div className="text-center">
+                    <Suspense fallback={<div>Loading...</div>}>
                     {glitch === 'base' &&
                     <div>
-                      <img src="/assets/foto-alvaro.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
+                      <img src={data?.[0]?.about_img} alt="yo" className="glitch-img w-full h-full object-cover"/>
                     </div>}
                   {glitch === 'glitch' &&
                     <div>
-                      <img ref={instantaneo.ref} src="/assets/foto-alvaro.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
+                      <img ref={instan.ref} src={data?.[0]?.about_img} alt="" className="glitch-img w-full h-full object-cover"/>
                     </div>}
+                    </Suspense>
                   {glitch === 'cambio' &&
                     <div>
                       <img ref={delay.ref} src="/assets/alpha-y-yo.jpeg" alt="" className="glitch-img w-full h-full object-cover"/>
                     </div>}
-                  {/* <img
-                  ref={glitch_library.ref} className="glitch-img w-full h-full object-cover"
-                  src={
-                    glitch === 'base'
-                      ? '/assets/foto-alvaro.jpeg'
-                      : glitch === 'glitch'
-                      ? '/assets/foto-alvaro.jpeg'
-                      : glitch === 'cambio'
-                      ? '/assets/gato-dudoso.jpeg'
-                      : ''
-                  }/> */}
                   </div>
                 </div>
               </div>

@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <div className=' bg-black'>
       <div
-          className="absolute pointer-events-none inset-0 opacity-[0.10] "
+          className="fixed pointer-events-none inset-0 opacity-[0.10] "
           style={{
             backgroundImage: `
             linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
