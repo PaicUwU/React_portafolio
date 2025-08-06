@@ -5,7 +5,7 @@ import { fetchData } from '../api/fetchData'
 
   const apiData = fetchData('http://127.0.0.1:8000/api/aboutme');
 
-  const Start = () => {
+  const Start = ({startRef}) => {
     
   const data = apiData.read();
   const [glitch, setGlitch] = useState('base'); 
@@ -51,8 +51,8 @@ import { fetchData } from '../api/fetchData'
     };
 
   return (
-    <section className='w-full'>
-      <div className=" max-h-screen max-w-7xl mx-auto">
+    <section ref={startRef} className='w-full'>
+      <div className=" max-h-screen max-w-[1328px] mx-auto">
         <div className='flex justify-between items-center flex-row h-screen '>
             <div className=' flex flex-col gap-10 '>
                 <p style={{ filter: 'saturate(150%) brightness(120%)' }} className='bg-black  text-cyan-300 font-serif tracking-[.25em] text-[11px] w-fit'>
@@ -79,7 +79,7 @@ import { fetchData } from '../api/fetchData'
                   </div>
                   </Suspense>
                   </div>
-                  <div style={{ filter: 'saturate(150%) brightness(120%)' }} className='p-4 flex flex-col gap-2  w-full h-40 border-2 border-lime-500 shadow-lg/30 shadow-lime-500 bg-black response'>
+                  <div style={{ filter: 'saturate(150%) brightness(120%)' }} className='p-4 flex flex-col gap-2 w-full h-40 border-2 border-lime-500 shadow-lg/30 shadow-lime-500 bg-black response ring-1 ring-lime-500'>
                     <Suspense fallback={<div>Loading...</div>}>
                     <span className='text-green-700 font-serif font-extralight tracking-widest leading-loose'>
                       {'<'} {data?.[0]?.about_description} {'>'}
