@@ -3,28 +3,22 @@ import { useState, useEffect } from 'react'
 import { useGlitch } from 'react-powerglitch'
 import { fetchData } from '../api/fetchData'
 
+  //obtener data de la api por medio de el archivo fetchData entregando la url
   const apiData = fetchData('http://127.0.0.1:8000/api/aboutme');
 
   const Start = ({startRef}) => {
-    
+  
+  //agregar data a la variable
   const data = apiData.read();
+
   const [glitch, setGlitch] = useState('base'); 
 
-  const instan = useGlitch({
+
+  //configuracion del efecto glitch
+  const createGlitch = (start, end = undefined) => useGlitch({
     glitchTimeSpan: {
-            start: 0,
-            end: 0.7,
-        },
-        shake: {
-            velocity: 5,
-            amplitudeX: 0.1,
-            amplitudeY: 0.1,
-        }
-      });
-    
-  const delay = useGlitch({
-    glitchTimeSpan: {
-            start: 0.4
+            start,
+            ...(end !== undefined && {end}),
         },
         shake: {
             velocity: 5,
@@ -33,22 +27,67 @@ import { fetchData } from '../api/fetchData'
         }
       });
 
-   const handleClick = () => {
-    setGlitch('glitch');
-      console.log('Button clicked!');
-      const timer = setTimeout(() => {
-        setGlitch('cambio');
-      }, 300);
-      const timer2 = setTimeout(() => {
-        setGlitch('glitch');
-      }, 1500);
-      const timer3 = setTimeout(() => {
-        setGlitch('cambio');
-      }, 2000);
-      const timer4 = setTimeout(() => {
-        setGlitch('base');
-      }, 2200);
-    };
+  const instan = createGlitch(0, 0.7);
+  const delay = createGlitch(0.4);
+
+  // const instan = useGlitch({
+  //   glitchTimeSpan: {
+  //           start: 0,
+  //           end: 0.7,
+  //       },
+  //       shake: {
+  //           velocity: 5,
+  //           amplitudeX: 0.1,
+  //           amplitudeY: 0.1,
+  //       }
+  //     });
+    
+  // const delay = useGlitch({
+  //   glitchTimeSpan: {
+  //           start: 0.4
+  //       },
+  //       shake: {
+  //           velocity: 5,
+  //           amplitudeX: 0.1,
+  //           amplitudeY: 0.1,
+  //       }
+  //     });
+
+  
+  const handleClick = () =>{
+
+    const glitchAnimation = [
+      {delay: 0, state: 'glitch'},
+      {delay: 300, state: 'cambio'},
+      {delay: 1500, state: 'glitch'},
+      {delay: 2000, state: 'cambio'},
+      {delay: 2200, state: 'base'}
+    ]
+    
+    glitchAnimation.forEach(({delay, state}) => {
+      setTimeout(() => {
+        setGlitch(state);
+      }, delay);
+    });
+
+  }
+
+  //  const sdf = () => {
+  //   setGlitch('glitch');
+  //     // console.log('Button clicked!');
+  //     const timer = setTimeout(() => {
+  //       setGlitch('cambio');
+  //     }, 300);
+  //     const timer2 = setTimeout(() => {
+  //       setGlitch('glitch');
+  //     }, 1500);
+  //     const timer3 = setTimeout(() => {
+  //       setGlitch('cambio');
+  //     }, 2000);
+  //     const timer4 = setTimeout(() => {
+  //       setGlitch('base');
+  //     }, 2200);
+  //   };
 
   return (
     <section ref={startRef} className='w-full'>

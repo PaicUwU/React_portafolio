@@ -53,7 +53,7 @@ const Skills = ({skillsRef}) => {
   ]
 
   const lista_skills = skills?.map((skill) => {
-  const settings = mapSettings[skill.id - 1 % mapSettings.length];
+  const settings = mapSettings[(skill.id - 1) % mapSettings.length];
 
     return(
       <Suspense key={skill.id} fallback={<div>Loading...</div>}>
